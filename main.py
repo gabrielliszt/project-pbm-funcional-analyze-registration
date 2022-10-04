@@ -41,17 +41,19 @@ for cnpj in cnpjs:
     campo_cnpj.send_keys(cnpj)
     time.sleep(1)
     campo_cnpj.send_keys(Keys.ENTER)
-    time.sleep(1)
+    time.sleep(2)
 
     span_message = driver.find_element(By.ID, 'ContentPlaceHolder1_lblNaoCnpjInvalido').text
 
     if span_message == 'Este CNPJ não pode ser cadastrado, pois não pertence à matriz!':
         mensagens.append('NÃO CADASTRADO')
-
+        print(f'{cnpj} não cadastrado.')
     elif span_message == 'Este CNPJ já está cadastrado!':
         mensagens.append('CADASTRADO')
+        print(f'{cnpj} cadastrado.')
     else:
         mensagens.append('NÃO CADASTRADO')
+        print(f'{cnpj} não cadastrado.')
 
     driver.refresh()
 
